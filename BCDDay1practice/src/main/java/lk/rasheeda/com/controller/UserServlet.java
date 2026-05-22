@@ -22,10 +22,7 @@ public class UserServlet extends HttpServlet {
         user.setName(name);
         user.setMobile(mobile);
 
-        resp.setContentType("text/plain");
-        PrintWriter out  = resp.getWriter();
-        out.println("Name: " + user.getName());
-        out.println("Mobile: " + user.getMobile());
+
 
     }
 }
