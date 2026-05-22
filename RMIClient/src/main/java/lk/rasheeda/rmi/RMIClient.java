@@ -1,6 +1,7 @@
 package lk.rasheeda.rmi;
 
 import lk.rasheeda.rmi.client.Message;
+import lk.rasheeda.rmi.model.Data;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -17,9 +18,13 @@ public class RMIClient {
             }
 
             Message massage =(Message) registry.lookup("message_service");
-            java.lang.String message = massage.hello();
+            java.lang.String msg = massage.hello();
+            lk.rasheeda.rmi.model.Data data = massage.getData();
 
-            System.out.println(message);
+            System.out.println(data.getId());
+            System.out.println(data.getName());
+
+            System.out.println(msg);
 
         } catch (Exception e) {
             e.printStackTrace();
