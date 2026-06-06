@@ -20,4 +20,11 @@ public class MessageImpl extends UnicastRemoteObject implements Message {
 
         return new Data(10,"App Version");
     }
+
+    @Override
+    public String getResult(int num1, int num2) throws RemoteException {
+        int total = num1 + num2;
+        String result = String.valueOf(total);
+        return result;
+    }
 }
