@@ -5,9 +5,9 @@ import jakarta.annotation.PreDestroy;
 import jakarta.ejb.*;
 import lk.rasheeda.ecomm.user.remote.TestRemote;
 
-@Stateful(mappedName = "TestRemoteBean")
+@Stateful(mappedName = "TestNewRemoteBean")
 //@Startup
-public class TestRemoteBean implements TestRemote {
+public class TestNewRemoteBean implements TestRemote {
 
     int i;
 
