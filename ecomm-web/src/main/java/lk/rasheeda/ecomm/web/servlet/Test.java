@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 import lk.rasheeda.ecomm.user.dto.UserDTO;
 import lk.rasheeda.ecomm.user.remote.TestRemote;
 import lk.rasheeda.ecomm.user.remote.UserRemote;
+import lk.rasheeda.ejb.remote.AppSetting;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -23,6 +24,10 @@ public class Test extends HttpServlet {
     @EJB(lookup = "java:global/ecomm-user-1.0/TestNewRemoteBean!lk.rasheeda.ecomm.user.remote.TestRemote") //J2EE 5 +
     private TestRemote testRemote;
 
+    @EJB
+    private AppSetting appSetting;
+
+
     @Override
     public void init(ServletConfig config) throws ServletException {
         System.out.println("Web Servlet init");
@@ -33,6 +38,8 @@ public class Test extends HttpServlet {
         resp.getWriter().write("Ecomm web module Test...");
 
         testRemote.test();
+
+        resp.getWriter().write("APP Name:" + appSetting.getName());
 
     }
 }
