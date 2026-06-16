@@ -1,6 +1,7 @@
 package lk.rasheeda.ecomm.web.servlet;
 
 import jakarta.ejb.EJB;
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -27,6 +28,9 @@ public class Test extends HttpServlet {
     @EJB
     private AppSetting appSetting;
 
+//    @Inject
+//    private MyApp myApp;
+
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -38,6 +42,8 @@ public class Test extends HttpServlet {
         resp.getWriter().write("Ecomm web module Test...");
 
         testRemote.test();
+
+//        myApp.doSomething();
 
         resp.getWriter().write("APP Name:" + appSetting.getName());
 
