@@ -1,12 +1,14 @@
 package lk.rasheeda.cdi;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 
 import java.io.Serializable;
 
-@ApplicationScoped
+//@ApplicationScoped
+@Dependent
 public class MyService implements Serializable {
 
     public void doSomething(){
