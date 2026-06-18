@@ -51,6 +51,23 @@
                 <version>3.3.0</version>
                 <configuration>
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <modules>
+                        <jarModule>
+                            <groupId>lk.rasheeda</groupId>
+                            <artifactId>core</artifactId>
+                            <bundleFileName>core.jar</bundleFileName>
+                        </jarModule>
+                        <ejbModule>
+                            <groupId>lk.rasheeda</groupId>
+                            <artifactId>ejb</artifactId>
+                            <bundleFileName>ejb.jar</bundleFileName>
+                        </ejbModule>
+                        <webModule>
+                            <groupId>lk.rasheeda</groupId>
+                            <artifactId>web</artifactId>
+                            <bundleFileName>web.war</bundleFileName>
+                        </webModule>
+                    </modules>
                 </configuration>
             </plugin>
         </plugins>
