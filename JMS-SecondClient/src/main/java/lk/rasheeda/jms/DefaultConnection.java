@@ -19,7 +19,8 @@ public class DefaultConnection {
 
             Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
-            Topic topic = (Topic) context.lookup("myTopic");
+//            Topic topic = (Topic) context.lookup("myTopic");
+            Topic topic = session.createTopic("abcd");
 
             MessageProducer producer = session.createProducer(topic);
 
