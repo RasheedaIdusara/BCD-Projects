@@ -12,7 +12,7 @@ public class App {
 
             InitialContext context = new InitialContext();
             TopicConnectionFactory factory =
-                    (TopicConnectionFactory) context.lookup("myTopicConnectionFactory");
+                    (TopicConnectionFactory) context.lookup("jms/myTopicConnectionFactory");
 
             TopicConnection connection = factory.createTopicConnection();
             connection.start();

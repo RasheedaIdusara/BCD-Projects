@@ -5,27 +5,23 @@ import jakarta.jms.*;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-public class App {
+public class QueueApp {
     public static void main(String[] args) {
+
         try {
             InitialContext context = new InitialContext();
-            TopicConnectionFactory factory =
-                    (TopicConnectionFactory) context.lookup("jms/myTopicConnectionFactory");
+            QueueConnectionFactory factory =
+                    (QueueConnectionFactory) context.lookup("jms/myQueueConnection");
 
-            TopicConnection connection = factory.createTopicConnection();
+            QueueConnection connection = factory.createQueueConnection();
             connection.start();
 
-            TopicSession session = connection.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
-            Topic topic = (Topic) context.lookup("myTopic");
+            QueueSession session = connection.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
+            Queue queue = (Queue) context.lookup("myQueue");
 
-            TopicSubscriber subscriber = session.createSubscriber(topic);
+            QueueReceiver receiver = session.createReceiver(queue);
 
-//            Message message = subscriber.receive();
-//            System.out.println(message);
-
-            subscriber.setMessageListener(new MessageListener() {
-
-                @Override
+            receiver.setMessageListener(new MessageListener() {
                 public void onMessage(Message message) {
                     try {
 
