@@ -2,6 +2,7 @@ package lk.rasheeda.mq;
 
 import jakarta.jms.*;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.ScheduledMessage;
 
 public class MessageSender {
 
@@ -20,6 +21,7 @@ public class MessageSender {
 
             MessageProducer producer = session.createProducer(topic);
             TextMessage textMessage = session.createTextMessage("Hello World");
+            textMessage.setStringProperty(ScheduledMessage.AMQ_SCHEDULED_CRON,"* * * * *");
             producer.send(textMessage);
 
             producer.close();
