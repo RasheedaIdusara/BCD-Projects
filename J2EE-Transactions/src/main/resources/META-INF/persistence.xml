@@ -9,7 +9,7 @@
             <property name="jakarta.persistence.jdbc.url"
                       value="jdbc:mysql://127.0.0.1:3306/jta_db?useSSL=false&amp;allowPublicKeyRetrieval=true"/>
             <property name="jakarta.persistence.jdbc.user" value="root"/>
-            <property name="jakarta.persistence.jdbc.password" value="your DB Password"/>
+            <property name="jakarta.persistence.jdbc.password" value="rash@20030105Idusara"/>
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
             <property name="hibernate.show_sql" value="true"/>

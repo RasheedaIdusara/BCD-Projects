@@ -10,18 +10,28 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/test")
 public class Test extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-            EntityManagerFactory entityManagerFactory
-                    = Persistence.createEntityManagerFactory("JTA-PU");
+//            EntityManagerFactory entityManagerFactory
+//                    = Persistence.createEntityManagerFactory("JTA-PU");
+//
+//            EntityManager entityManager = entityManagerFactory.createEntityManager();
+//
+//            System.out.println(entityManager);
 
-            EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityManager em = ManagerFactory.getEntityManager();
 
-            System.out.println(entityManager);
+        List<Object[]> resultList
+                = em.createNativeQuery("select * from user").getResultList();
+
+        resultList.forEach(r->{
+            System.out.println(r[0] + " " + r[1] + " " + r[2]);
+        });
 
 
 
