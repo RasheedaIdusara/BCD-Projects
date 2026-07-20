@@ -27,7 +27,7 @@ public class Test extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        userBean.register("rashe@gmail.com","rasheeda","123");
+        userBean.register("rasheeda@gmail.com","rasheeda","123");
 
 //        EntityManager em = ManagerFactory.getEntityManager();
 
