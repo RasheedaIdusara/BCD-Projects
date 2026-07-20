@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lk.rasheeda.jta.entity.User;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 @Stateless
 public class UserBeanimpl implements UserBean {
@@ -22,6 +23,8 @@ public class UserBeanimpl implements UserBean {
 
         Session session = em.unwrap(Session.class);
 
+        Transaction transaction = session.beginTransaction();
+
         User user = new User();
         user.setEmail(email);
         user.setName(name);
@@ -29,6 +32,8 @@ public class UserBeanimpl implements UserBean {
         //em.persist(user);
 
         session.save(user);
+
+        transaction.commit();
 
         return true;
     }
