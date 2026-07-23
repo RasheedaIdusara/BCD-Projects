@@ -12,13 +12,13 @@ public class AccountBeanimpl implements AccountBean {
     @PersistenceContext(unitName = "JTA-PU")
     private EntityManager em;
 
-    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     @Override
     public void creditAmount(Integer accountNumber, Double amount) {
 
 
         EntityTransaction transaction = em.getTransaction();
-        System.out.println("creditamount : "+System.identityHashCode(transaction));
+        System.out.println("creditamount : " + System.identityHashCode(transaction));
 
         try {
 
@@ -33,13 +33,13 @@ public class AccountBeanimpl implements AccountBean {
         }
     }
 
-    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     @Override
     public void debitAmount(Integer accountNumber, Double amount) {
 
 
         EntityTransaction transaction = em.getTransaction();
-        System.out.println("debitamount : "+System.identityHashCode(transaction));
+        System.out.println("debitamount : " + System.identityHashCode(transaction));
 
         try {
 
@@ -52,9 +52,9 @@ public class AccountBeanimpl implements AccountBean {
 
             account.setBalance(account.getBalance() - amount);
 
-        }catch (NoResultException e){
+        } catch (NoResultException e) {
             e.printStackTrace();
         }
 
     }
-    }
+}

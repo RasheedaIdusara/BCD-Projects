@@ -58,7 +58,7 @@ public class UserBeanimpl implements UserBean {
         return true;
     }
 
-    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     @Override
     public void transferMoney(Integer fromAccountNumber, Integer toAccountNumber, Double amount) {
 
