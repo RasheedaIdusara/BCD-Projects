@@ -12,7 +12,7 @@ public class AccountBeanimpl implements AccountBean {
     @PersistenceContext(unitName = "JTA-PU")
     private EntityManager em;
 
-    @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+    @TransactionAttribute(TransactionAttributeType.NEVER)
     @Override
     public void creditAmount(Integer accountNumber, Double amount) {
 
