@@ -58,12 +58,14 @@ public class UserBeanimpl implements UserBean {
         return true;
     }
 
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    @TransactionAttribute(TransactionAttributeType.NEVER)
     @Override
     public void transferMoney(Integer fromAccountNumber, Integer toAccountNumber, Double amount) {
 
         EntityTransaction transaction = em.getTransaction();
         System.out.println("transfer : "+System.identityHashCode(transaction));
+
+        //transaction.commit();
 
         accountBean.debitAmount(fromAccountNumber,amount);
         accountBean.creditAmount(toAccountNumber,amount);
