@@ -3,6 +3,7 @@ package lk.rasheeda.jta.ejb;
 import jakarta.annotation.Resource;
 import jakarta.ejb.*;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.UserTransaction;
 import lk.rasheeda.jta.entity.User;
@@ -27,7 +28,7 @@ public class UserBeanimpl implements UserBean {
         return false;
     }
 
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     @Override
     public boolean register(String email, String name, String password) {
 
@@ -57,8 +58,12 @@ public class UserBeanimpl implements UserBean {
         return true;
     }
 
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     @Override
     public void transferMoney(Integer fromAccountNumber, Integer toAccountNumber, Double amount) {
+
+        EntityTransaction transaction = em.getTransaction();
+        System.out.println("transfer : "+System.identityHashCode(transaction));
 
         accountBean.debitAmount(fromAccountNumber,amount);
         accountBean.creditAmount(toAccountNumber,amount);

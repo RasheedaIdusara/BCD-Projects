@@ -1,10 +1,9 @@
 package lk.rasheeda.jta.ejb;
 
 import jakarta.ejb.Stateless;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
+import jakarta.ejb.TransactionAttribute;
+import jakarta.ejb.TransactionAttributeType;
+import jakarta.persistence.*;
 import lk.rasheeda.jta.entity.Account;
 
 @Stateless
@@ -13,13 +12,19 @@ public class AccountBeanimpl implements AccountBean {
     @PersistenceContext(unitName = "JTA-PU")
     private EntityManager em;
 
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     @Override
     public void creditAmount(Integer accountNumber, Double amount) {
+
+
+        EntityTransaction transaction = em.getTransaction();
+        System.out.println("creditamount : "+System.identityHashCode(transaction));
 
         try {
 
             Account account = em.createQuery("SELECT a FROM Account a WHERE a.accountNumber = :accountNumber",
                     Account.class).setParameter("accountNumber", accountNumber).getSingleResult();
+
 
             account.setBalance(account.getBalance() + amount);
 
@@ -28,13 +33,22 @@ public class AccountBeanimpl implements AccountBean {
         }
     }
 
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     @Override
     public void debitAmount(Integer accountNumber, Double amount) {
+
+
+        EntityTransaction transaction = em.getTransaction();
+        System.out.println("debitamount : "+System.identityHashCode(transaction));
 
         try {
 
             Account account = (Account) em.createNamedQuery("Account.findbyAccountNo")
                     .setParameter("accountNumber", accountNumber).getSingleResult();
+
+            if(account.getBalance() < amount){
+                throw new RuntimeException("Insufficient Balance");
+            }
 
             account.setBalance(account.getBalance() - amount);
 
@@ -43,4 +57,4 @@ public class AccountBeanimpl implements AccountBean {
         }
 
     }
-}
+    }
