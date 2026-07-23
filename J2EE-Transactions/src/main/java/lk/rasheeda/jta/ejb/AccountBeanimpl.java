@@ -12,7 +12,7 @@ public class AccountBeanimpl implements AccountBean {
     @PersistenceContext(unitName = "JTA-PU")
     private EntityManager em;
 
-    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    @TransactionAttribute(TransactionAttributeType.MANDATORY)
     @Override
     public void creditAmount(Integer accountNumber, Double amount) {
 
@@ -33,7 +33,7 @@ public class AccountBeanimpl implements AccountBean {
         }
     }
 
-    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    @TransactionAttribute(TransactionAttributeType.MANDATORY)
     @Override
     public void debitAmount(Integer accountNumber, Double amount) {
 
@@ -46,9 +46,9 @@ public class AccountBeanimpl implements AccountBean {
             Account account = (Account) em.createNamedQuery("Account.findbyAccountNo")
                     .setParameter("accountNumber", accountNumber).getSingleResult();
 
-            if(account.getBalance() < amount){
-                throw new RuntimeException("Insufficient Balance");
-            }
+//            if(account.getBalance() < amount){
+//                throw new RuntimeException("Insufficient Balance");
+//            }
 
             account.setBalance(account.getBalance() - amount);
 
