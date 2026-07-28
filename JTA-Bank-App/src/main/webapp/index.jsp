@@ -12,5 +12,12 @@
 </head>
 <body>
 <h1>Welcome JTA-Bank-App</h1>
+
+<a href="index.jsp">Home Page</a>
+<br>
+<a href="login.jsp">Login Page</a>
+<br>
+<a href="register.jsp">Register Page</a>
+
 </body>
 </html>
