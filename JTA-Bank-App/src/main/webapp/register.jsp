@@ -145,8 +145,8 @@
 
     <form action="register" method="post">
         <div class="form-group">
-            <label for="username">name</label>
-            <input type="text" id="name" name="name" placeholder="Enter your username" required />
+            <label for="name">name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required />
         </div>
 
         <div class="form-group">
