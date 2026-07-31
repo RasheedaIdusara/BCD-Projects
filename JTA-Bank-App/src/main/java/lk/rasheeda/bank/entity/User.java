@@ -7,6 +7,17 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
+@NamedQueries({
+        @NamedQuery(
+                name = "User.findByEmail",
+                query = "SELECT u FROM User u WHERE u.email=:email"
+        )
+
+        @NamedQuery(
+                name = "User.findByEmailAndPassword",
+                query = "SELECT u FROM User u WHERE u.email=:email AND u.password=:password"
+        )
+})
 public class User {
 
     @Id
