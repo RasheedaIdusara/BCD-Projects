@@ -29,12 +29,53 @@ public class AccountServiceBean implements AccountService {
 
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.MANDATORY)
     public void creditToAccount(String accountNumber, BigDecimal amount) {
+
+        if (amount.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("Amount must be greater than zero");
+        }
+
+        try {
+
+             lk.rasheeda.bank.entity.Accounts accounts = em.createNamedQuery("Account.findByAccountNo", Accounts.class).
+                    setParameter("accountNo", accountNumber).
+                    getSingleResult();
+
+             accounts.setBalance(accounts.getBalance() + amount.doubleValue());
+
+             em.merge(accounts);
+
+        }catch (NoResultException e) {
+            throw new EJBException("Account not found" + accountNumber, e);
+        }
 
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.MANDATORY)
     public void debitToAccount(String accountNumber, BigDecimal amount) throws InsufficientFundsException {
+
+        if (amount.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("Amount must be greater than zero");
+        }
+
+        try {
+
+            lk.rasheeda.bank.entity.Accounts accounts = em.createNamedQuery("Account.findByAccountNo",Accounts.class).
+                    setParameter("accountNo",accountNumber).
+                    getSingleResult();
+
+            if(accounts.getBalance() <  amount.doubleValue()){
+                throw new InsufficientFundsException(accountNumber,amount,BigDecimal.valueOf(accounts.getBalance()));
+            }
+
+            accounts.setBalance(accounts.getBalance() - amount.doubleValue());
+            em.merge(accounts);
+
+        }catch (NoResultException e) {
+            throw new EJBException("Account not found" + accountNumber, e);
+        }
 
     }
 
