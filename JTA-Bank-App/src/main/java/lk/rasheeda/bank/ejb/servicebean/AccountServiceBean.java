@@ -96,7 +96,7 @@ public class AccountServiceBean implements AccountService {
     }
 
     @Override
-    public List<Accounts> findUserByUserEmail(String email) throws AccountNotFoundException {
+    public List<Accounts> findUserByUserEmail(String email) {
         return em.createNamedQuery("Account.findByUserEmail", Accounts.class).
                 setParameter("email", email).
                 getResultList();

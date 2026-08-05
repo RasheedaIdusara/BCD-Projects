@@ -16,7 +16,7 @@ public interface AccountService {
     void creditToAccount(String accountNumber, BigDecimal amount );
     void debitToAccount(String accountNumber, BigDecimal amount ) throws InsufficientFundsException;
     Accounts findByAccountNumber(String accountNumber) throws AccountNotFoundException;
-    List<Accounts> findUserByUserEmail(String email) throws AccountNotFoundException;
+    List<Accounts> findUserByUserEmail(String email);
     Accounts createAccount(String email, AccountType type , BigDecimal openbalance);
     String generateAccountNumber(AccountType type);
 }

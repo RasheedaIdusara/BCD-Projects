@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.List" %>
 <%@ page import="lk.rasheeda.bank.entity.Accounts" %>
 <%--
@@ -237,10 +238,10 @@
 <nav class="navbar">
     <div class="brand-logo">JTA-<span>BANK</span></div>
     <div class="nav-links">
-        <a href="dashboard" class="active">Dashboard</a>
+        <a href="dashboard">Dashboard</a>
         <a href="deposit.jsp">Deposit</a>
         <a href="withdraw.jsp">Withdraw</a>
-        <a href="transfer.jsp">Transfer</a>
+        <a href="transfer.jsp" class="active">Transfer</a>
         <a href="new-account.jsp">New Account</a>
         <a href="logout" class="logout-btn">Logout</a>
     </div>
@@ -248,51 +249,55 @@
 
 <!-- Main Dashboard Body -->
 <div class="dashboard-container">
-    <div class="welcome-header">
-        <h1>Welcome Back, ${sessionScope.username}</h1>
-    </div>
+    <h2 class="section-title">Transfer</h2>
 
-    <h2 class="section-title">Your Accounts</h2>
+    <form action="transfer" method="post">
 
-    <%
-        List<Accounts> accounts = (List<Accounts>) request.getAttribute("accounts");
+        <table>
 
-        if (accounts == null || accounts.isEmpty()) {
-    %>
+            <tr>
+                <th>Source Account No</th>
+                <td>
+                    <select name="SourceAccount_number" required>
 
-    <div class="empty-state">
-        <p>You don't have any account yet. <a href="create-account">Create New Account</a></p>
-    </div>
+                        <option value="" disabled selected>Select Account</option>
+                        <c:forEach var="account" items="${requestScope.accounts}">
+                            <option value="${account.accNo}">${account.accNo}</option>
+                        </c:forEach>
 
-    <%
-    } else {
-    %>
+                    </select>
+                </td>
+            </tr>
 
-    <div class="accounts-grid">
-        <% for (Accounts account : accounts) { %>
-        <div class="account-card">
-            <div>
-                <div class="account-header">
-                    <span class="account-number">Acc: <%= account.getAccNo() %></span>
-                    <span class="account-badge"><%= account.getAccountType() %></span>
-                </div>
-                <div class="balance-section">
-                    <div class="balance-label">Available Balance</div>
-                    <div class="balance-amount">LKR <%= String.format("%,.2f", account.getBalance()) %></div>
-                </div>
-            </div>
-            <div>
-                <a class="action-link" href="history?accNo=<%= account.getAccNo() %>">
-                    View Transaction History &rarr;
-                </a>
-            </div>
-        </div>
-        <% } %>
-    </div>
 
-    <%
-        }
-    %>
+
+            <tr>
+                <th>Destination Account No</th>
+                <td>
+                    <input type="text" name="DestinationAccount_number" required>
+
+                </td>
+            </tr>
+
+
+            <tr>
+                <th>Amount</th>
+
+                <td>
+                    <input type="number" step="0.01" name="amount" placeholder="Account Number" required>
+                </td>
+            </tr>
+
+
+            <tr>
+                <th></th>
+                <td><input type="submit" value="Transfer"/></td>
+            </tr>
+
+        </table>
+
+    </form>
+
 
 </div>
 

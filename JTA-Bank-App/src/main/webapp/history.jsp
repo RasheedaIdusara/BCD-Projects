@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: HP
@@ -135,31 +137,51 @@
 
 <div class="card">
     <div class="bank-brand">JTA-Bank</div>
-    <h1>Welcome Back</h1>
+    <h1>History for ${requestScope.accountNo}</h1>
 
-    <% if(request.getAttribute("error") != null) { %>
-    <div class="error-msg">
-        <%= request.getAttribute("error") %>
-    </div>
-    <% } %>
+    <table>
+        <tr>
+            <th>Date/Time</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Related Account</th>
+            <th>Balance After</th>
+        </tr>
 
-    <form action="login" method="post">
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" id="email" name="email" placeholder="Enter email" required />
-        </div>
+        <c:forEach var="transaction" items="${requestScope.transactons}">
 
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="••••••••" required />
-        </div>
+            <tr>
+                <td>${transaction.timestamp}</td>
+                <td>${transaction.type}</td>
+                <td>
 
-        <input type="submit" value="Sign In" class="btn-submit">
+                    <fmt:formatNumber value="${transaction.amount}"
+                                      type="number"
+                                      minFractionDigits="2"
+                                      maxFractionDigits="2"
+                                      groupingUsed="true"/>
 
-        <p class="footer-text">
-            Don't have an account? <a href="register.jsp">Create Account</a>
-        </p>
-    </form>
+                </td>
+
+                <td>${transaction.relatedAccountNo eq null ? "-" : transaction.relatedAccountNo}</td>
+
+                <td>
+
+                    <fmt:formatNumber value="${transaction.balanceAfter}"
+                                      type="number"
+                                      minFractionDigits="2"
+                                      maxFractionDigits="2"
+                                      groupingUsed="true"/>
+                </td>
+
+
+            </tr>
+
+        </c:forEach>
+
+    </table>
+
+
 </div>
 
 </body>
