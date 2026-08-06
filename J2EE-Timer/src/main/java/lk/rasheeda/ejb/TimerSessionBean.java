@@ -4,7 +4,7 @@ import jakarta.annotation.Resource;
 import jakarta.ejb.*;
 
 @Stateless
-public class TimerSessionBean implements TimedObject {
+public class TimerSessionBean{
 
     @Resource
     private TimerService timerService;
@@ -12,17 +12,12 @@ public class TimerSessionBean implements TimedObject {
     public void createTimer(){
         //System.out.println(timerService);
 
-        timerService.createTimer(10000,"Test Timer");
+        timerService.createTimer(10000L,5000L,"Test Timer");
     }
 
-    //@Timeout
+    @Timeout
     public void task(){
         System.out.println("Test Timer Task...");
     }
 
-    @Override
-    public void ejbTimeout(Timer timer) {
-        System.out.println("Test Timer Task implements way(old version)...");
-
-    }
 }
