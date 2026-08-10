@@ -5,6 +5,7 @@ import jakarta.interceptor.AroundTimeout;
 import jakarta.interceptor.InvocationContext;
 
 public class TimerIntercepter {
+
     @AroundTimeout
     public Object aroundTimeout(InvocationContext ic) throws Throwable {
         System.out.println("TestInterceptor aroundTimeout");
@@ -13,4 +14,5 @@ public class TimerIntercepter {
         System.out.println("Timer Timeout: " + timer.getNextTimeout());
         return ic.proceed();
     }
+
 }

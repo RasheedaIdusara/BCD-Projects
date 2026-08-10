@@ -31,6 +31,15 @@ public class TestInterceptor {
     @AroundInvoke
     Object m(InvocationContext invocationContext) throws Exception {
         System.out.println("TestInterceptor m() start...");
+
+        Object[] parameters = invocationContext.getParameters();
+        for (Object parameter : parameters) {
+            System.out.println("Parameter:"+parameter);
+        }
+
+        parameters[0]="supun";
+        invocationContext.setParameters(parameters);
+
         Object proceed = invocationContext.proceed();
         System.out.println("TestInterceptor m() end...");
         return proceed;
