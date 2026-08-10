@@ -8,11 +8,12 @@ import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.Interceptors;
 import jakarta.interceptor.InvocationContext;
+import lk.rasheeda.ee.annotation.Logged;
 import lk.rasheeda.ee.interceptor.AInterceptor;
 import lk.rasheeda.ee.interceptor.TestInterceptor;
 
+@Logged
 @Singleton
-@Interceptors({TestInterceptor.class,AInterceptor.class})
 public class UserSessionBean {
 
     @PostConstruct
