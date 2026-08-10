@@ -12,7 +12,7 @@ import lk.rasheeda.ee.interceptor.AInterceptor;
 import lk.rasheeda.ee.interceptor.TestInterceptor;
 
 @Singleton
-@Interceptors({TestInterceptor.class, AInterceptor.class})
+@Interceptors({TestInterceptor.class,AInterceptor.class})
 public class UserSessionBean {
 
     @PostConstruct

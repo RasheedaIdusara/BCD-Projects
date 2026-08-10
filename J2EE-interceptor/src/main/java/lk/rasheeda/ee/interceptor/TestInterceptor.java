@@ -6,11 +6,16 @@ import jakarta.interceptor.AroundConstruct;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.InvocationContext;
 
+import java.lang.reflect.Constructor;
+
 public class TestInterceptor {
 
     @AroundConstruct
-    public void AroundConstruct(InvocationContext ic){
+    public void AroundConstruct(InvocationContext ic) throws Exception {
         System.out.println("TestInterceptor AroundConstruct");
+        Constructor<?> constructor = ic.getConstructor();
+        System.out.println("TestIntercepterConstructor AroundConstruct :"+constructor);
+        ic.proceed();
     }
 
     public TestInterceptor() {
@@ -32,7 +37,7 @@ public class TestInterceptor {
     }
 
     @PreDestroy
-    public void preDestroy(){
+    public void preDestroy(InvocationContext ic) throws Exception {
         System.out.println("TestInterceptor preDestroy");
     }
 
