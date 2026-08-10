@@ -8,8 +8,8 @@ import lk.rasheeda.ee.annotation.Logged;
 
 @Logged
 @Interceptor
-@Priority(Interceptor.Priority.APPLICATION+1)
-public class LoggingInterceptor {
+@Priority(Interceptor.Priority.APPLICATION+2)
+public class DBLoggingInterceptor {
     @AroundInvoke
     public Object Intercept(InvocationContext ctx) throws Exception {
         System.out.println("Logging Intercepter start...");
