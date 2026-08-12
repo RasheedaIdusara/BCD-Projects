@@ -1,9 +1,6 @@
 package lk.rasheeda.web.rest;
 
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
 @Path("/user")
@@ -13,8 +10,8 @@ public class User {
 
     @Path("ID")
     @GET
-    public String m(){
-        return "ID";
+    public String m(@QueryParam("name") String name) {
+        return "Name: " + name;
     }
 
     @Path("/nic")
