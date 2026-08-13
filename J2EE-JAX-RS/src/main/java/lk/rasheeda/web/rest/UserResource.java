@@ -29,9 +29,27 @@ public class UserResource {
         return "Name: " + name ;
     }
 
+    @Path("form")
     @POST
     public String form(@BeanParam User user) {
         return "User: " + user.getName() + "And Age: " + user.getAge() ;
+    }
+
+    @Path("newform")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String newform(User user) {
+        return "Name: " + user.getName() + "And Age: " + user.getAge() ;
+    }
+
+    @Path("body")
+    @POST
+    public String body(String body) {//String , byte[],InputStream
+        return body;
+    }
+
+    public String Multipart(){
+        return "";
     }
 
 }
