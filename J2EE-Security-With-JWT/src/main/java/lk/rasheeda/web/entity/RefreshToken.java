@@ -5,13 +5,20 @@ import jakarta.persistence.*;
 import java.time.Instant;
 
 @Entity
-@Table(name = "refresh_token")
+@Table(name = "refresh_token",
+indexes = {
+        @Index(columnList = "token",unique = true),
+        @Index(columnList = "username")
+})
 @NamedQueries({
         @NamedQuery(name = "RefreshToken.findByToken",
                 query = "SELECT rf FROM RefreshToken rf WHERE rf.token = :token AND rf.expireAt > :now"),
 
         @NamedQuery(name = "RefreshToken.deleteToken",
-                query = "DELETE FROM RefreshToken rf WHERE rf.token= :token")
+                query = "DELETE FROM RefreshToken rf WHERE rf.token= :token"),
+
+        @NamedQuery(name = "RefreshToken.deleteExpiredToken",
+                query = "DELETE FROM RefreshToken rf WHERE rf.expireAt < :now")
 })
 public class RefreshToken {
 
@@ -72,4 +79,5 @@ public class RefreshToken {
     public Instant getCreatedAt() {
         return createdAt;
     }
+
 }

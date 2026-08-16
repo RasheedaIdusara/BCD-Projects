@@ -87,7 +87,7 @@ public class AuthResource {
     @Path("/refresh")
     public Response refresh(RefreshRequest refreshRequest) {
 
-        if (refreshRequest == null || refreshRequest.refreshToken() == null) {
+        if (refreshRequest != null || refreshRequest.refreshToken() != null) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(Map.of("error", "Missing Refresh Token"))
                     .build();

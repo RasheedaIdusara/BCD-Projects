@@ -25,7 +25,7 @@ public class RefreshTokenService {
 
         Instant expiry = Instant.now().plusSeconds(REFRESH_TOKEN_VALIDITY_DAYS * 24 * 3600);
 
-        RefreshToken rt = new RefreshToken(username, token, expiry);
+        RefreshToken rt = new RefreshToken(token, username, expiry);
 
         em.persist(rt);
 
